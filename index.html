@@ -1,65 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="script.js"></script>
+    <title>Odoo Connection</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Login</h1>
-    <form id="loginForm">
-      <input type="text" id="urlInput" placeholder="URL" required>
-      <input type="text" id="dbNameInput" placeholder="Database Name" required>
-      <input type="text" id="usernameInput" placeholder="Username" required>
-      <input type="password" id="passwordInput" placeholder="Password" required>
-      <button type="submit">Login</button>
+    <h1>Odoo Connection</h1>
+    <form action="connect.py" method="post">
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required><br><br>
+
+        <label for="db">Database:</label>
+        <input type="text" id="db" name="db" required><br><br>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Connect">
     </form>
-    <p id="message"></p>
-  </div>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      var url = document.getElementById('urlInput').value;
-      var dbName = document.getElementById('dbNameInput').value;
-      var username = document.getElementById('usernameInput').value;
-      var password = document.getElementById('passwordInput').value;
-
-      // Perform authentication logic here
-      fetch(url + '/web/session/authenticate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          jsonrpc: '2.0',
-          params: {
-            db: dbName,
-            login: username,
-            password: password
-          }
-        })
-      })
-      .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Authentication failed');
-        }
-      })
-      .then(function(data) {
-        // Authentication successful
-        document.getElementById('message').innerHTML = 'Hello, User!';
-        // Perform any further actions or navigate to the home page
-      })
-      .catch(function(error) {
-        // Authentication failed
-        document.getElementById('message').innerHTML = 'Invalid credentials. Please check your input.';
-        console.log('Error:', error);
-      });
-    });
-  </script>
+    <p>
+        {% if message %}
+            {{ message }}
+        {% endif %}
+    </p>
 </body>
 </html>
