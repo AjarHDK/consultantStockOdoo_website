@@ -24,6 +24,3 @@ else:
 redirect_url = 'index.html?' + urlencode(params)
 
 # Redirect the user back to the HTML page
-print('Status: 302 Found')
-print('Location: ' + redirect_url)
-print()

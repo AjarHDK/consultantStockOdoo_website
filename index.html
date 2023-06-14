@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Odoo Connection</h1>
-    <form action="connect.py" method="post">
+    <form action="auth.py" method="post">
         <label for="url">URL:</label>
         <input type="text" id="url" name="url" required><br><br>
 
@@ -20,11 +20,5 @@
 
         <input type="submit" value="Connect">
     </form>
-
-    <p>
-        {% if message %}
-            {{ message }}
-        {% endif %}
-    </p>
 </body>
 </html>
